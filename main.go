@@ -9,6 +9,10 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/mac"
 )
 
+// Frontend production bundle (run `npm run build` in frontend/ before `wails build` or `go build`).
+// `all:` includes hidden files Vite may emit.
+//
+//go:embed all:frontend/dist
 var assets embed.FS
 
 func main() {
