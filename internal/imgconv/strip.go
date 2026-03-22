@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// StripMetadata re-encodes the image so EXIF, ICC profiles, and most auxiliary PNG/WebP chunks
+// re-encodes the image so EXIF, ICC profiles, and most auxiliary PNG/WebP chunks
 // are not carried over (decode → RGBA → encode). JPEG uses high quality to limit recompression.
 // WebP input is written as PNG (no WebP encoder in this app). Animated GIF becomes a single frame.
 func StripMetadata(inputPath, outputPath string) (*ConvertResult, error) {
@@ -20,7 +20,7 @@ func StripMetadata(inputPath, outputPath string) (*ConvertResult, error) {
 	return Convert(inputPath, outputPath, outFmt, jpegQuality, 0, "default")
 }
 
-// formatForStrip maps detected decode format to a supported output format.
+// map detected decode format to a supported output format
 func formatForStrip(detected string) string {
 	f := strings.ToLower(strings.TrimSpace(detected))
 	switch f {
@@ -35,10 +35,10 @@ func formatForStrip(detected string) string {
 	case "tiff", "tif":
 		return "tiff"
 	case "webp":
-		// No WebP encoder; PNG preserves transparency from decoded bitmap.
+		// no WebP encoder; PNG preserves transparency from decoded bitmap.
 		return "png"
 	default:
-		// Safe fallback if decoder recognized something odd but image.Decode works in Convert.
+		// safe fallback if decoder recognized something odd but image.Decode works in Convert
 		return "png"
 	}
 }

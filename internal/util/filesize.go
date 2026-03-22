@@ -2,7 +2,7 @@ package util
 
 import "fmt"
 
-// FormatFileSize converts bytes to human-readable format (e.g. "1.5 MB")
+// converts bytes to human-readable format
 func FormatFileSize(bytes int64) string {
 	const unit = 1024
 	if bytes < unit {

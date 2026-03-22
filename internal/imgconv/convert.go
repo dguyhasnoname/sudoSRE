@@ -11,12 +11,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"sudosre/internal/util"
-
 	"golang.org/x/image/bmp"
 	"golang.org/x/image/draw"
 	"golang.org/x/image/tiff"
 	_ "golang.org/x/image/webp"
+
+	"sudosre/internal/util"
 )
 
 type Info struct {
@@ -42,10 +42,10 @@ type ConvertResult struct {
 	OutputFormat  string `json:"output_format"`
 }
 
-// SupportedFormats lists the output formats the converter can produce.
+// lists the output formats the converter can produce
 var SupportedFormats = []string{"png", "jpeg", "gif", "bmp", "tiff"}
 
-// GetInfo returns metadata about an image file.
+// returns metadata about an image file
 func GetInfo(path string) (*Info, error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -69,10 +69,7 @@ func GetInfo(path string) (*Info, error) {
 	}, nil
 }
 
-// Convert reads an image from inputPath, optionally resizes it, encodes in outputFormat,
-// and writes it to outputPath.
-// quality is used for JPEG (1–100). maxDimension is the maximum longest edge in pixels; 0 means no resize.
-// pngCompression is one of: default, fast, best, none (PNG output only).
+// reads an image from inputPath, optionally resizes it, encodes in outputFormat and writes it to outputPath
 func Convert(inputPath, outputPath, outputFormat string, quality int, maxDimension int, pngCompression string) (*ConvertResult, error) {
 	inputInfo, err := os.Stat(inputPath)
 	if err != nil {
